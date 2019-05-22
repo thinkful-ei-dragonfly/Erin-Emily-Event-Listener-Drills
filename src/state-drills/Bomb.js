@@ -1,5 +1,4 @@
 import React from 'react';
-import { clearInterval } from 'timers';
 // import ReactDOM from 'react-dom';
 
 class Bomb extends React.Component {
@@ -10,16 +9,20 @@ class Bomb extends React.Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       console.log('did mount')
+      if (this.state.count < 8) {
       const newCount = this.state.count + 1
       this.setState({
         count: newCount
-      })
+      })}
+      else {
+        clearInterval(this.interval)
+      }
     }, 1000)
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
-    console.log('hello')
+    console.log('unmount')
   }
 
   render() {
